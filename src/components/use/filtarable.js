@@ -1,7 +1,8 @@
 import { reactive } from "vue";
+import { watches } from "../../main";
 
-export const useFilterable = ({ loadItems, initialFiltres }, component) => {
-  const watch = component.$watch.bind(component);
+export const useFilterable = ({ loadItems, initialFiltres }) => {
+  if (!watches) return;
   const page = reactive({ value: 1 });
   const filters = reactive({
     ...initialFiltres,
@@ -14,8 +15,8 @@ export const useFilterable = ({ loadItems, initialFiltres }, component) => {
     }).then((result) => {
       items.value = result;
     });
-  watch(() => page.value, load);
-  watch(() => filters, load, {
+  watches(() => page.value, load);
+  watches(() => filters, load, {
     deep: true,
   });
   load();

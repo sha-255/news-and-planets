@@ -49,23 +49,21 @@ export default {
       this.categories = await getCategories();
     },
   },
-  setup() {},
+  setup() {
+    const { page, filters, items } = useFilterable({
+      loadItems: getPosts,
+      initialFiltres: {
+        categories: null,
+      },
+    });
+    return {
+      page,
+      filters,
+      items,
+    };
+  },
   created() {
     this.loadCategories();
-
-    const { page, filters, items } = useFilterable(
-      {
-        loadItems: getPosts,
-        initialFiltres: {
-          categories: null,
-        },
-      },
-      this
-    );
-
-    this.page = page;
-    this.filters = filters;
-    this.items = items;
   },
 };
 </script>
