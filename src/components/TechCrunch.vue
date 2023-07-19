@@ -14,11 +14,9 @@
     </label>
     <hr />
     <div>
-      <button :disabled="page.value === 1" @click="page.value -= 1">
-        Prev
-      </button>
+      <button :disabled="page.value === 1" @click="prevPage">Prev</button>
       {{ page.value }}
-      <button @click="page.value += 1">Next</button>
+      <button @click="nextPage">Next</button>
     </div>
     <hr />
 
@@ -50,16 +48,19 @@ export default {
     },
   },
   setup() {
-    const { page, filters, items } = useFilterable({
+    const { page, filters, items, prevPage, nextPage } = useFilterable({
       loadItems: getPosts,
       initialFiltres: {
         categories: null,
       },
     });
+
     return {
       page,
       filters,
       items,
+      prevPage,
+      nextPage,
     };
   },
   created() {

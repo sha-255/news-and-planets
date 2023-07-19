@@ -1,7 +1,10 @@
 import { createApp, watch } from "vue";
 import "./style.css";
 import App from "./App.vue";
+// import dara from "./eventBus";
 //import "./magicApi";
+
+// const isO = dara.isOn;
 
 const app = createApp(App);
 //  to magicApi.js
@@ -16,6 +19,11 @@ app.mixin({
     Object.assign(this, reactiveVars);
   },
 });
+
+// export const beforeUnmounted = (fn) => {
+//   if (!currentComponent) return;
+//   currentComponent.isO("hook:beforeUnmount", fn);
+// };
 
 export const watches = (...args) => {
   if (!currentComponent) return;
